@@ -28,7 +28,14 @@ class _SplashscreenState extends State<MSplashScreen> {
     return Scaffold(
       body: Container(
         color: Colors.yellow,
-        child: Center(child: Image.asset("assets/images/busLogo.png")),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(child: Image.asset("assets/images/busLogo.png")),
+            Center(child: Text("Let's Track",style: TextStyle(fontSize: 30,color: Colors.black),),),
+            Center(child: Text("Our Bus...",style: TextStyle(fontSize: 25,color: Colors.black),),),
+          ],
+        ),
       ),
     );
   }

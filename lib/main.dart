@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schoolride/Responsive_Layout/Responsive_Layout.dart';
 import 'package:schoolride/Screens/MobileScreen/SplashScreen.dart';
+import 'package:schoolride/Screens/TabletScreen/SplashScreen.dart';
 import 'Screens/TabletScreen/TLoginScreen.dart';
 
 
@@ -25,7 +26,7 @@ class SchoolRide extends StatelessWidget {
             titleTextStyle: TextStyle(color: Colors.black,fontSize: 19, fontWeight: FontWeight.normal),
           ),
         ),
-      home:ResponsiveLayout(mobile: MSplashScreen(), tablet: TLoginScreen())
+      home:ResponsiveLayout(mobile: MSplashScreen(), tablet: TSplashScreen())
     );
   }
 }
