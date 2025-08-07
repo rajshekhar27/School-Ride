@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schoolride/Responsive_Layout/Responsive_Layout.dart';
-import 'package:schoolride/Screens/DesktopScreen.dart';
-import 'package:schoolride/Screens/MobileScreen.dart';
-import 'package:schoolride/Screens/TabletScreen.dart';
+import 'package:schoolride/Screens/MobileScreen/SplashScreen.dart';
+import 'Screens/TabletScreen/TLoginScreen.dart';
 
 
 void main() {
@@ -15,12 +14,18 @@ class SchoolRide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      showSemanticsDebugger: false,
+      debugShowCheckedModeBanner: false,
       title: "MyKid's Bus",
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home:ResponsiveLayout(desktop: DesktopScreen(), mobile: MobileScreen(), tablet: TabletScreen())
+        theme: ThemeData(
+          iconTheme: IconThemeData(color: Colors.black),
+          appBarTheme: AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Colors.orange.shade400,
+            elevation: 2,
+            titleTextStyle: TextStyle(color: Colors.black,fontSize: 19, fontWeight: FontWeight.normal),
+          ),
+        ),
+      home:ResponsiveLayout(mobile: MSplashScreen(), tablet: TLoginScreen())
     );
   }
 }

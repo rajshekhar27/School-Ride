@@ -4,9 +4,8 @@ class ResponsiveLayout extends StatelessWidget {
 
   Widget mobile;
   Widget tablet;
-  Widget desktop;
 
-  ResponsiveLayout({required this.desktop,required this.mobile, required this.tablet}) : super();
+  ResponsiveLayout({required this.mobile, required this.tablet}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +13,8 @@ class ResponsiveLayout extends StatelessWidget {
       if(constraints.maxWidth<500)
         {
           return mobile;
-        }else if(constraints.maxWidth<1100){
+        }else
         return tablet;
-      }else{
-        return desktop;
-      }
     });
   }
 }
