@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-class PrincipalLoginScreen extends StatefulWidget {
-  const PrincipalLoginScreen({super.key});
+class ParentsLoginScreen extends StatefulWidget {
+  const ParentsLoginScreen({super.key});
 
   @override
-  State<PrincipalLoginScreen> createState() => _PrincipalLoginScreenState();
+  State<ParentsLoginScreen> createState() => _ParentsLoginScreenState();
 }
 
-class _PrincipalLoginScreenState extends State<PrincipalLoginScreen> {
+class _ParentsLoginScreenState extends State<ParentsLoginScreen> {
   //for animation
   bool _isAnimate=false;
 
@@ -42,10 +42,10 @@ class _PrincipalLoginScreenState extends State<PrincipalLoginScreen> {
                 top: mq.height*0.07,
                 right: _isAnimate? mq.width*0.35:-mq.width*0.5,
                 width: mq.width * 0.3,
-                duration: Duration(seconds: 2),
-                child: Image.asset("assets/images/Principal.png", )),
+                duration: Duration(milliseconds: 1500 ),
+                child: Image.asset("assets/images/parents.png", )),
 
-            //Admin Choice box
+            //Parents Choice box
             Positioned(
               bottom: mq.height*0.20,
               left: mq.width*0.1,
@@ -80,7 +80,7 @@ class _PrincipalLoginScreenState extends State<PrincipalLoginScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(11.0),
                             child: Text(
-                              "Admin:",
+                              "Paretns:",
                               style: TextStyle(fontSize: 20, color: Colors.black),
                             ),
                           ),
@@ -151,8 +151,28 @@ class _PrincipalLoginScreenState extends State<PrincipalLoginScreen> {
                       ),
                     ),
 
-                    TextButton(onPressed: (){}, child: Text("forget Possword")),
-                    TextButton(onPressed: (){}, child: Text("Need Help?")),
+                    //login button
+                    Center(
+                      child: SizedBox(
+                        width: mq.width*0.4,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange.shade100
+                            ),
+                            onPressed: (){}, child: Text("Login", style: TextStyle(color: Colors.black),)),
+                      ),
+                    ),
+
+                    //forget button and help
+                    Row(
+                      children: [
+                        TextButton(onPressed: (){}, child: Text("Forget Possword")),
+                        SizedBox(
+                          width: mq.width*0.15,
+                        ),
+                        TextButton(onPressed: (){}, child: Text("Need Help?")),
+                      ],
+                    ),
                   ],
                 ),
               ),

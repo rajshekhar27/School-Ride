@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:schoolride/Screens/MobileScreen/DriverScreen/DriverLoginScreen.dart';
+import 'package:schoolride/Screens/MobileScreen/ParentsScreens/ParentsLoginScreen.dart';
 
-import 'PrincipalLoginScreen.dart';
+import 'PrincipalScreens/PrincipalLoginScreen.dart';
 
 class MLoginScreen extends StatefulWidget {
   const MLoginScreen({super.key});
@@ -12,19 +14,8 @@ class MLoginScreen extends StatefulWidget {
 }
 
 class _MLoginScreenState extends State<MLoginScreen> {
-  //for animation
-  bool _isAnimate=false;
 
-  //setting state of animation
-  @override
-  void initState() {
-    super.initState();
-    Timer(Duration(milliseconds: 400),(){
-      setState(() {
-        _isAnimate=true;
-      });
-    });
-  }
+  bool needHelp=false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +31,10 @@ class _MLoginScreenState extends State<MLoginScreen> {
         body: Stack(
           children: [
             //making animation
-            AnimatedPositioned(
+            Positioned(
                 top: mq.height*0.07,
-                right: _isAnimate? mq.width*0.35:-mq.width*0.9,
+                right: mq.width*0.35,
                 width: mq.width * 0.3,
-                duration: Duration(seconds: 2),
                 child: Image.asset("assets/images/busSplash.png", )),
 
             //Login Choice box
@@ -101,11 +91,13 @@ class _MLoginScreenState extends State<MLoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(onPressed: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>PrincipalLoginScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>PrincipalLoginScreen()));
                           }, child: Text("Principal",style: TextStyle(fontSize: 18,color: Colors.black),),style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange.shade100,
                           ),),
-                          ElevatedButton(onPressed: (){}, child: Text("Parents",style: TextStyle(fontSize: 18,color: Colors.black)),style: ElevatedButton.styleFrom(
+                          ElevatedButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ParentsLoginScreen()));
+                          }, child: Text("Parents",style: TextStyle(fontSize: 18,color: Colors.black)),style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange.shade100,
                           ),),
                         ],
@@ -118,7 +110,9 @@ class _MLoginScreenState extends State<MLoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          ElevatedButton(onPressed: (){}, child: Text("Driver",style: TextStyle(fontSize: 18,color: Colors.black)),
+                          ElevatedButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>DriverLoginScreen()));
+                          }, child: Text("Driver",style: TextStyle(fontSize: 18,color: Colors.black)),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange.shade100,
                           ),
@@ -132,9 +126,114 @@ class _MLoginScreenState extends State<MLoginScreen> {
               ),
             ),
             Positioned(
-                right: mq.width*0.13,
-                bottom: mq.height*0.2,
-                child: Text("Need Help?",style: TextStyle(color: Colors.blue.shade500),)),
+              right: mq.width * 0.10,
+              bottom: mq.height * 0.18,
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    needHelp = !needHelp; // toggle the flag
+                  });
+                },
+                child: Text("Need Help?"),
+              ),
+            ),
+            
+            // Show black box if needHelp is true
+            if (needHelp)
+              Positioned(
+                right: mq.width * 0.10,
+                bottom: mq.height * 0.20,
+                child: Container(
+                  height: mq.height*0.6,
+                  width: mq.width*0.8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0,5),
+                    )]
+                  ),
+                  child: Stack(
+                    children: [
+                     Positioned(
+                        right: mq.width * 0.03,
+                        top: mq.height*0.02,
+                        child: GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                needHelp=false;
+                              });
+                            },
+                            child: Icon(Icons.cancel_outlined)),
+
+                      ),
+                      Positioned(
+                          top: mq.height*0.08,
+                          left: mq.width * 0.05, // so it doesn't stick to the left edge
+                          right: mq.width * 0.03, // limits width
+                          child: Container(
+                            height: mq.height*0.1,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange.shade50,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: Offset(0,5),
+                                  )]
+                              ),
+                              child: Center(child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("If you are Principal then click on Principal button for login as principal", style: TextStyle(fontWeight: FontWeight.bold),softWrap: true,),
+                              )))),
+                      Positioned(
+                          top: mq.height*0.22,
+                          left: mq.width * 0.05, // so it doesn't stick to the left edge
+                          right: mq.width * 0.03, // limits width
+                          child: Container(
+                            height: mq.height*0.1,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange.shade50,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: Offset(0,5),
+                                  )]
+                              ),
+                              child: Center(child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("If you are Parent then click on Parent button for login as principal", style: TextStyle(fontWeight: FontWeight.bold),softWrap: true,),
+                              )))),
+                      Positioned(
+                          top: mq.height*0.36,
+                          left: mq.width * 0.05, // so it doesn't stick to the left edge
+                          right: mq.width * 0.03, // limits width
+                          child: Container(
+                            height: mq.height*0.1,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange.shade50,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: Offset(0,5),
+                                  )]
+                              ),
+                              child: Center(child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("If you are Driver then click on Driver button for login as Driver", style: TextStyle(fontWeight: FontWeight.bold),softWrap: true,),
+                              )))),
+                    ],
+                  ),
+                ),
+              ),
           ],
         ),
       ),
